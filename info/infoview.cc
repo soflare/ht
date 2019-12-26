@@ -492,7 +492,8 @@ bool ht_info_viewer::igotonode(const char *f, const char *n, bool add2hist)
 	bool newnode = !node || (node && (strcmp(node, n) != 0));
 	int fl = strlen(f) - strlen(MAGIC_HT_HELP);
 	if ((fl>=0) && (strcmp(f+fl, MAGIC_HT_HELP) == 0)) {
-		infotext = ht_strdup(htinfo);
+		infotext = (char*)malloc(sizeof(htinfo));
+		memcpy(infotext, htinfo, sizeof(htinfo));
 		strcpy(ncwd, "");
 		strcpy(nfile, MAGIC_HT_HELP);
 	} else {
